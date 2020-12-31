@@ -2,6 +2,7 @@ import React from 'react';
 import {Text, SafeAreaView, FlatList} from 'react-native';
 import {connect} from 'react-redux';
 import {getUsersRequest, usersState} from '../actions/users';
+import EmployeeList from '../components/EmployeeList';
 
 interface Props {
   users: usersState;
@@ -17,24 +18,12 @@ class EmployMe extends React.Component<Props> {
     this.props.getUsersRequest();
   }
 
-  renderItem = ({item}) => {
-    return (
-      <Text>
-        {item.firstName} {item.lastName}
-      </Text>
-    );
-  };
-
   render() {
     const {items} = this.props.users;
 
     return (
-      <SafeAreaView>
-        <FlatList
-          data={items}
-          keyExtractor={(item) => item.id.toString()}
-          renderItem={this.renderItem}
-        />
+      <SafeAreaView style={{marginHorizontal: 10}}>
+        <EmployeeList items={items} />
       </SafeAreaView>
     );
   }

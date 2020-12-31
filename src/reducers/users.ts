@@ -1,11 +1,14 @@
-import {Types} from '../actions';
+import {Types, usersState, UsersActionTypes} from '../actions';
 
 const INITIAL_STATE = {
   items: [],
   error: '',
 };
 
-export const usersReducer = (state = INITIAL_STATE, action) => {
+export const usersReducer = (
+  state: usersState = INITIAL_STATE,
+  action,
+): usersState => {
   switch (action.type) {
     case Types.GET_USERS_SUCCESS:
       return {
