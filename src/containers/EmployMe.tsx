@@ -3,6 +3,7 @@ import {Text, SafeAreaView, FlatList} from 'react-native';
 import {connect} from 'react-redux';
 import {getUsersRequest, usersState} from '../actions/users';
 import EmployeeList from '../components/EmployeeList';
+import {StoreState} from '../reducers';
 
 interface Props {
   users: usersState;
@@ -29,7 +30,7 @@ class EmployMe extends React.Component<Props> {
   }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state: StoreState) => {
   return {
     users: state.users,
   };

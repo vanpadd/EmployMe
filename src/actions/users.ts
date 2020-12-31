@@ -50,7 +50,11 @@ export const getUsersRequest = () => {
   };
 };
 
-export const getUsersSuccess = ({items}) => {
+export const getUsersSuccess = ({
+  items,
+}: {
+  items: Item[];
+}): GetUsersSuccessAction => {
   return {
     type: Types.GET_USERS_SUCCESS,
     payload: {
@@ -59,7 +63,7 @@ export const getUsersSuccess = ({items}) => {
   };
 };
 
-export const userError = ({error}) => {
+export const userError = ({error}: {error: string}): GetUserErrorAction => {
   return {
     type: Types.USER_ERROR,
     payload: {

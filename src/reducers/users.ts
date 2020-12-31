@@ -7,7 +7,7 @@ const INITIAL_STATE = {
 
 export const usersReducer = (
   state: usersState = INITIAL_STATE,
-  action,
+  action: UsersActionTypes,
 ): usersState => {
   switch (action.type) {
     case Types.GET_USERS_SUCCESS:
