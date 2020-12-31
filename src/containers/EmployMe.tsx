@@ -1,13 +1,14 @@
 import React from 'react';
-import {Text, SafeAreaView} from 'react-native';
+import {Text, SafeAreaView, FlatList} from 'react-native';
 import {connect} from 'react-redux';
-import {getUsersRequest} from '../actions/users';
+import {getUsersRequest, usersState} from '../actions/users';
 
 interface Props {
+  users: usersState;
   getUsersRequest: Function;
-  deleteUserRequest: Function;
-  createUserRequest: Function;
-  userError: Function;
+  // deleteUserRequest: Function;
+  // createUserRequest: Function;
+  // userError: Function;
 }
 
 class EmployMe extends React.Component<Props> {
@@ -15,17 +16,31 @@ class EmployMe extends React.Component<Props> {
     super(props);
     this.props.getUsersRequest();
   }
+
+  renderItem = ({item}) => {
+    return (
+      <Text>
+        {item.firstName} {item.lastName}
+      </Text>
+    );
+  };
+
   render() {
+    const {items} = this.props.users;
+
     return (
       <SafeAreaView>
-        <Text>EmployMe</Text>
+        <FlatList
+          data={items}
+          keyExtractor={(item) => item.id.toString()}
+          renderItem={this.renderItem}
+        />
       </SafeAreaView>
     );
   }
 }
 
 const mapStateToProps = (state) => {
-  // console.log(state);
   return {
     users: state.users,
   };

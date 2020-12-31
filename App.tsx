@@ -14,7 +14,10 @@ export default () => {
 
   const sagaMiddleWare = createSagaMiddleware();
 
-  const store = createStore(reducers, applyMiddleware(sagaMiddleWare));
+  const store = createStore(
+    reducers,
+    composeWithDevTools(applyMiddleware(sagaMiddleWare)),
+  );
 
   sagaMiddleWare.run(rootSaga);
 
