@@ -1,19 +1,24 @@
 import React from 'react';
-import {FlatList, Text, View} from 'react-native';
+import {FlatList, Text, View, TouchableOpacity} from 'react-native';
 import {Item} from '../actions/users';
 
-const renderItem = ({item}: {item: Item}) => {
+const renderItem = (item: Item, onPress: Function) => {
   return (
     <View
       style={{padding: 10, borderBottomColor: 'grey', borderBottomWidth: 1}}>
-      <Text style={{fontSize: 18}}>
-        {item.firstName} {item.lastName}
-      </Text>
+      <TouchableOpacity
+        onPress={() => {
+          onPress(item.id);
+        }}>
+        <Text style={{fontSize: 18}}>
+          {item.firstName} {item.lastName}
+        </Text>
+      </TouchableOpacity>
     </View>
   );
 };
 
-const EmployeeList = ({items}: {items: Item[]}) => {
+const EmployeeList = ({items, onPress}: {items: Item[]; onPress: Function}) => {
   return (
     <FlatList
       data={items.sort((a: Item, b: Item) => {
@@ -30,7 +35,7 @@ const EmployeeList = ({items}: {items: Item[]}) => {
         }
       })}
       keyExtractor={(item) => item.id.toString()}
-      renderItem={renderItem}
+      renderItem={({item}) => renderItem(item, onPress)}
     />
   );
 };

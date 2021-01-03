@@ -33,6 +33,7 @@ export type UsersActionTypes =
   | GetUsersSuccessAction
   | GetUserErrorAction
   | CreateUserRequestAction;
+
 export interface Item {
   id: number;
   firstName: string;
@@ -59,6 +60,31 @@ export const getUsersSuccess = ({
     type: Types.GET_USERS_SUCCESS,
     payload: {
       items,
+    },
+  };
+};
+
+export const createUserRequest = ({
+  firstName,
+  lastName,
+}: {
+  firstName: string;
+  lastName: string;
+}): CreateUserRequestAction => {
+  return {
+    type: Types.CREATE_USER_REQUEST,
+    payload: {
+      firstName,
+      lastName,
+    },
+  };
+};
+
+export const deleteUserRequest = (userId: number) => {
+  return {
+    type: Types.DELETE_USER_REQUEST,
+    payload: {
+      userId,
     },
   };
 };
