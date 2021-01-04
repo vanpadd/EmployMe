@@ -1,5 +1,5 @@
 import React from 'react';
-import {Text, SafeAreaView, FlatList} from 'react-native';
+import {SafeAreaView, ActivityIndicator} from 'react-native';
 import {connect} from 'react-redux';
 import {
   getUsersRequest,
@@ -40,12 +40,16 @@ class EmployMe extends React.Component<Props> {
   };
 
   render() {
-    const {items} = this.props.users;
+    const {items, loading} = this.props.users;
 
     return (
       <SafeAreaView style={{marginHorizontal: 10}}>
         <EmployeeForm onSubmit={this.handleOnSubmit} />
-        <EmployeeList items={items} onPress={this.handleOnPress} />
+        {loading ? (
+          <ActivityIndicator style={{marginTop: 20}} size="large" />
+        ) : (
+          <EmployeeList items={items} onPress={this.handleOnPress} />
+        )}
       </SafeAreaView>
     );
   }

@@ -22,6 +22,13 @@ export interface CreateUserRequestAction {
   };
 }
 
+export interface GetUserRequestAction {
+  type: typeof Types.GET_USERS_REQUEST;
+  payload: {
+    loading: boolean;
+  };
+}
+
 interface DeleteUserRequestAction {
   type: typeof Types.DELETE_USER_REQUEST;
   payload: {
@@ -32,7 +39,8 @@ interface DeleteUserRequestAction {
 export type UsersActionTypes =
   | GetUsersSuccessAction
   | GetUserErrorAction
-  | CreateUserRequestAction;
+  | CreateUserRequestAction
+  | GetUserRequestAction;
 
 export interface Item {
   id: number;
@@ -43,6 +51,7 @@ export interface Item {
 export interface usersState {
   items: Item[];
   error: string;
+  loading: boolean;
 }
 
 export const getUsersRequest = () => {
